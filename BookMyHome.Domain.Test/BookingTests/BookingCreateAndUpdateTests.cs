@@ -25,13 +25,13 @@ public class BookingCreateAndUpdateTests
         var otherBookings = new List<Booking> { otherBooking };
 
         var services = new MockProvider();
-        var bookingDomainServiceMock  = new Mock<IBookingDomainService>();
+        var bookingDomainServiceMock = new Mock<IBookingDomainService>();
         bookingDomainServiceMock.Setup(b => b.OtherBookings(It.IsAny<Booking>())).Returns(otherBookings);
-        services.Add<IBookingDomainService>(bookingDomainServiceMock);
+        services.Add(bookingDomainServiceMock);
 
         // Act
         var sut = Booking.Create(accommodationMock, userMock, new BookingDates(DateOnly.Parse(startDate),
-                       DateOnly.Parse(endDate)), services);
+            DateOnly.Parse(endDate)), services);
         // Assert
         Assert.NotNull(sut);
     }
@@ -54,15 +54,14 @@ public class BookingCreateAndUpdateTests
         var otherBookings = new List<Booking> { otherBooking };
 
         var services = new MockProvider();
-        var bookingDomainServiceMock  = new Mock<IBookingDomainService>();
+        var bookingDomainServiceMock = new Mock<IBookingDomainService>();
         bookingDomainServiceMock.Setup(b => b.OtherBookings(It.IsAny<Booking>())).Returns(otherBookings);
-        services.Add<IBookingDomainService>(bookingDomainServiceMock);
+        services.Add(bookingDomainServiceMock);
 
         // Act
-        //var sut = Booking.Create(accommodationMock, userMock, new BookingDates(DateOnly.Parse(startDate),
-            //DateOnly.Parse(endDate)), services);
         // Assert
-        Assert.Throws<InvalidOperationException>(() => Booking.Create(accommodationMock, userMock, new BookingDates(DateOnly.Parse(startDate),
-        DateOnly.Parse(endDate)), services));
+        Assert.Throws<InvalidOperationException>(() => Booking.Create(accommodationMock, userMock, new BookingDates(
+            DateOnly.Parse(startDate),
+            DateOnly.Parse(endDate)), services));
     }
 }
