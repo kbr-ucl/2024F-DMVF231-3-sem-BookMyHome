@@ -11,9 +11,10 @@ builder.Services.AddSwaggerGen();
 
 
 // Database
+// https://github.com/dotnet/SqlClient/issues/2239
 // https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/projects?tabs=dotnet-core-cli
 // Add-Migration InitialMigration -Context BookMyHomeContext -Project BookMyHome.DatabaseMigration
-// Update-Database -Context BookMyHomeContex
+// Update-Database -Context BookMyHomeContext -Project BookMyHome.DatabaseMigration
 builder.Services.AddDbContext<BookMyHomeContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BookMyHomeDbConnection"),
         x =>
