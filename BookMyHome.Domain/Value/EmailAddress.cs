@@ -1,22 +1,15 @@
 ﻿// ReSharper disable UnusedAutoPropertyAccessor.Global
+
+using BookMyHome.Domain.Shared;
+
 namespace BookMyHome.Domain.Value;
 
-public record EmailAddress
+public record EmailAddress(string Value) : RecordWithValidation
 {
-    public string Value { get; }
-
-    public EmailAddress(string value)
+    protected override void Validate()
     {
-        if (string.IsNullOrWhiteSpace(value))
-        {
-            throw new ArgumentException("Email address cannot be empty");
-        }
+        if (string.IsNullOrWhiteSpace(Value)) throw new ArgumentException("Email address cannot be empty");
 
-        if (!value.Contains('@'))
-        {
-            throw new ArgumentException("Email address is not valid");
-        }
-
-        Value = value;
+        if (!Value.Contains('@')) throw new ArgumentException("Email address is not valid");
     }
 }
