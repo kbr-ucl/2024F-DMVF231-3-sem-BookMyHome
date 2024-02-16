@@ -1,5 +1,5 @@
-using BookMyHome.Infrastructure.Database;
-using Microsoft.EntityFrameworkCore;
+using BookMyHome.Application;
+using BookMyHome.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,16 +9,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
-// Database
-// https://github.com/dotnet/SqlClient/issues/2239
-// https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/projects?tabs=dotnet-core-cli
-// Add-Migration InitialMigration -Context BookMyHomeContext -Project BookMyHome.DatabaseMigration
-// Update-Database -Context BookMyHomeContext -Project BookMyHome.DatabaseMigration
-builder.Services.AddDbContext<BookMyHomeContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("BookMyHomeDbConnection"),
-        x =>
-            x.MigrationsAssembly("BookMyHome.DatabaseMigration")));
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
