@@ -1,5 +1,6 @@
 ﻿using BookMyHome.Application.Queries.Booking;
 using BookMyHome.Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookMyHome.Infrastructure.Queries;
 
@@ -14,7 +15,7 @@ public class BookingQueries : IBookingQueries
 
     BookingQueryDto IBookingQueries.GetBooking(Guid id)
     {
-        var result = _db.Bookings
+        var result = _db.Bookings.AsNoTracking()
             .Select(b => new BookingQueryDto
             {
                 Id = b.Id,
@@ -32,7 +33,7 @@ public class BookingQueries : IBookingQueries
 
     IEnumerable<BookingQueryDto> IBookingQueries.GetBookingsByAccommodation(Guid accommodationId)
     {
-        var result = _db.Bookings
+        var result = _db.Bookings.AsNoTracking()
             .Select(b => new BookingQueryDto
             {
                 Id = b.Id,
@@ -50,7 +51,7 @@ public class BookingQueries : IBookingQueries
 
     IEnumerable<BookingQueryDto> IBookingQueries.GetBookingsByUser(Guid userId)
     {
-        var result = _db.Bookings
+        var result = _db.Bookings.AsNoTracking()
             .Select(b => new BookingQueryDto
             {
                 Id = b.Id,
