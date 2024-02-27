@@ -28,7 +28,7 @@ public class BookingQueries : IBookingQueries
             })
             .FirstOrDefault(b => b.Id == id);
 
-        return result is null ? throw new Exception("Booking not found") : result;
+        return result ?? throw new Exception("Booking not found");
     }
 
     IEnumerable<BookingQueryDto> IBookingQueries.GetBookingsByAccommodation(Guid accommodationId)
