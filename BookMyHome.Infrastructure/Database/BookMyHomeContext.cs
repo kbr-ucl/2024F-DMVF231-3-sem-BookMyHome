@@ -12,7 +12,7 @@ public class BookMyHomeContext : DbContext
     {
     }
 
-    public DbSet<Booking> Books { get; set; }
+    public DbSet<Booking> Bookings { get; set; }
     public DbSet<Accommodation> Accommodations { get; set; }
     public DbSet<Review> Reviews { get; set; }
     public DbSet<User> Users { get; set; }
