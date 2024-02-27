@@ -1,25 +1,14 @@
-﻿namespace BookMyHome.Domain.Value;
+﻿using BookMyHome.Domain.Shared;
 
-public record BookingDates
+namespace BookMyHome.Domain.Value;
+
+// https://stackoverflow.com/questions/64784374/c-sharp-9-records-validation
+public record BookingDates(DateOnly Arrival, DateOnly Departure) : RecordWithValidation
 {
-
-    public DateOnly Arrival { get; }
-    public DateOnly Departure { get; }
-
-    public BookingDates(DateOnly Arrival, DateOnly Departure)
-    {
-        if (Arrival > Departure)
-        {
-            throw new ArgumentException("Arrival date must be before departure date");
-        }
-
-        this.Arrival = Arrival;
-        this.Departure = Departure;
-    }
     public int DurationInDays => Departure.DayNumber - Arrival.DayNumber;
 
-    public bool IsOverlap(BookingDates exsistingBookingDates)
+    protected override void Validate()
     {
-        throw new NotImplementedException();
+        if (Arrival > Departure) throw new ArgumentException("Arrival date must be before departure date");
     }
 }

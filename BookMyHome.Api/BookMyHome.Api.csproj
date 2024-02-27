@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <InvariantGlobalization>true</InvariantGlobalization>
+    <InvariantGlobalization>false</InvariantGlobalization>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +24,10 @@
     <ProjectReference Include="..\BookMyHome.Domain\BookMyHome.Domain.csproj" />
     <ProjectReference Include="..\BookMyHome.Infrastructure\BookMyHome.Infrastructure.csproj" />
     <ProjectReference Include="..\BookMyHome.DatabaseMigration\BookMyHome.DatabaseMigration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
