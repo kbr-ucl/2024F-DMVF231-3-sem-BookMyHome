@@ -56,4 +56,21 @@ public class Booking : Entity
 
         return booking;
     }
+
+    public void Delete()
+    {
+        // Delete logic
+    }
+
+    public void Update(BookingDates dates, IServiceProvider services)
+    {
+        if (dates == null) throw new ArgumentNullException(nameof(dates));
+        if (services == null) throw new ArgumentNullException(nameof(services));
+        var domainService = services.GetService<IBookingDomainService>();
+        if (domainService == null) throw new ArgumentNullException(nameof(domainService));
+
+        BookingDates = dates;
+        if (IsBookingOverlapping(domainService.OtherBookings(this)))
+            throw new InvalidOperationException("Booking overlaps with existing booking");
+    }
 }

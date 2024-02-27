@@ -1,4 +1,5 @@
-﻿namespace BookMyHome.Application.Queries.Booking;
+﻿// ReSharper disable UnusedAutoPropertyAccessor.Global
+namespace BookMyHome.Application.Queries.Booking;
 
 public class BookingQueryDto
 {
@@ -8,5 +9,5 @@ public class BookingQueryDto
     public DateOnly Arrival { get; set; }
     public DateOnly Departure { get; set; }
     public double TotalPrice { get;  set; }
-    public byte[] RowVersion { get;  set; }
+    public byte[] RowVersion { get;  set; } = [];
 }
