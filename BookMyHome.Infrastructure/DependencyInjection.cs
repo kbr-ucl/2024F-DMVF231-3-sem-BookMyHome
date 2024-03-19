@@ -1,6 +1,8 @@
-﻿using BookMyHome.Domain.DomainServices;
+﻿using BookMyHome.Application.Queries.Booking;
+using BookMyHome.Domain.DomainServices;
 using BookMyHome.Infrastructure.Database;
 using BookMyHome.Infrastructure.DomainServices;
+using BookMyHome.Infrastructure.Queries;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +26,7 @@ public static class DependencyInjection
                     x.MigrationsAssembly("BookMyHome.DatabaseMigration")));
 
         services.AddScoped<IBookingDomainService, BookingDomainService>();
+        services.AddScoped<IBookingQuery, BookingQuery>();
 
         return services;
     }
